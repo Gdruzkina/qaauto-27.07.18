@@ -12,8 +12,8 @@ import static java.lang.Thread.sleep;
 
 
 public class LinkedinLoginTest {
-    WebDriver driver;
-    LinkedinLoginPage linkedinLoginPage;
+     WebDriver driver;
+     LinkedinLoginPage linkedinLoginPage;
 
     @BeforeMethod
     public void beforeMethod() {
@@ -41,8 +41,55 @@ public class LinkedinLoginTest {
 
         linkedinLoginPage.login("gasd", "Paro!");
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(driver);
-        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert box has incorrect message");
+        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
+               "При заполнении формы были допущены ошибки.Проверьте и исправьте отмеченные поля.",
+                "Alert box has incorrect message");
 
+    }
+
+    @Test
+    public void negativeLoginTestNull() {
+
+        linkedinLoginPage.login("", "");
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(driver);
+        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
+                "При заполнении формы были допущены ошибки.Проверьте и исправьте отмеченные поля.",
+                "Alert box has incorrect message");
+
+    }
+
+    @Test
+    public void negativeLoginTestWihtLogin() {
+
+        linkedinLoginPage.login("", "Parol123!");
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(driver);
+        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
+                "При заполнении формы были допущены ошибки.Проверьте и исправьте отмеченные поля.",
+                "Alert box has incorrect message");
+
+    }
+
+    @Test
+    public void negativeLoginTestWihPas() {
+
+        linkedinLoginPage.login("galdruzk", "");
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(driver);
+        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
+                "При заполнении формы были допущены ошибки.Проверьте и исправьте отмеченные поля.",
+                "Alert box has incorrect message");
+
+    }
+
+    @Test
+    public void negativeLoginTestNotCorrectLogin() {
+
+        linkedinLoginPage.login("ahdhasdjhas", "Parol123!");
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(driver);
+        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
+                "При заполнении формы были допущены ошибки.Проверьте и исправьте отмеченные поля.",
+                "Alert box has incorrect message");
+
+        //Assert.assertTrue(linkedinLoginSubmitPage.getAlertBoxText();
     }
 
 
