@@ -27,7 +27,9 @@ public class LinkedinHomePage {
 
     }
     public boolean isLoaded(){
-        return profileNavigationItem.isDisplayed() && getCurrentPageTitle().contains("LinkedIn") && getCurrentPageUrl().contains("/feed/");
+        return profileNavigationItem.isDisplayed()
+                && getCurrentPageTitle().contains("LinkedIn")
+                && getCurrentPageUrl().contains("/feed/");
 
     }
 }

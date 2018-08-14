@@ -33,4 +33,19 @@ public class LinkedinLoginPage {
 
     }
 
+    public String getCurrentPageTitle() {
+        return driver.getTitle();
+    }
+
+    public String getCurrentPageUrl() {
+        return driver.getCurrentUrl();
+
+    }
+
+    public boolean isLoaded(){
+        return userEmailField.isDisplayed()
+                && getCurrentPageTitle().contains("LinkedIn: Войти или зарегистрироваться");
+
+    }
+
 }
