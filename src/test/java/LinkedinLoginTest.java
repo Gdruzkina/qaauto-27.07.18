@@ -70,7 +70,7 @@ public class LinkedinLoginTest {
 
     }
     @DataProvider
-    public Object[][] validateShortUserEmailAndPass() {//
+    public Object[][] invalidDateShortUserEmailAndPass() {//
         return new Object[][]{ // инициализируем значение обьекта
                 { "s", "p","При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.","Слишком короткий текст (минимальная длина – 3 симв., введено – 1 симв.).","Пароль должен содержать не менее 6 символов."},
                 { "adhad", "Passeord","При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.","Укажите действительный адрес эл. почты.",""},
@@ -82,7 +82,7 @@ public class LinkedinLoginTest {
         };
     }
 
-    @Test(dataProvider = "validateShortUserEmailAndPass")
+    @Test(dataProvider = "ivvalidDateShortUserEmailAndPass")
     public void validateShortUserEmailAndPassword(String userEmail, String userPass,String correctMessage, String validationUserEmailField, String validationUserPassField)
     {
         linkedinLoginPage.login(userEmail,userPass);
