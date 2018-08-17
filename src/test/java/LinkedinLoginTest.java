@@ -70,27 +70,28 @@ public class LinkedinLoginTest {
 
     }
     @DataProvider
-    public Object[][] diferentLoginAndPasswordDiferentErrorMesage() {//
+    public Object[][] validateShortUserEmailAndPass() {//
         return new Object[][]{ // инициализируем значение обьекта
-                { "s", "p" },{"",""},// говорим что будет в обьекте
-                { "zxcvbnmlkjhgfdsaqwertyuioppoiuytrewqasdfghjkloikiujjuzxcvbnmlkjhgfdsaqwertyuioppoiuytrewqasdfghjkloikiujjuzxcvbnmlkjhgfdsaqwertyuioppoiuytrewqasdfghjkloikiujju", "Passeord"},
-                {"dshfkhsdfkhdsk2.com",""}
+                { "s", "p","При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.","Слишком короткий текст (минимальная длина – 3 симв., введено – 1 симв.).","Пароль должен содержать не менее 6 символов."},
+                { "adhad", "Passeord","При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.","Укажите действительный адрес эл. почты.",""},
+                {"galdruzk@gmail.com","notcorrectPass","При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.","",
+                        "Это неверный пароль. Повторите попытку или измените пароль."},
+                {"awe@qwrtyuiop asdfghjkl,mnbvcxzasdfghjkloiuytrewqasdfghjkloiuytgh gtyhgfrtgfdcvfgbvfgbvfgbdfdfdfdfdfdffdffxfdxfdxfdxfdx fzxcvvbnnnnnnnn  nnnnnn","Pfaf","При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.","Слишком длинный текст: максимальная длина – 128 симв., введено 143 симв.","Пароль должен содержать не менее 6 символов."},
+                {"12345678987887878","Parol123!","При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.","Обязательно включите в номер значок «+» и код своей страны.",""},
+                {"@#$#$@$$#$@$#$$#$#$","Parol123!","При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.","Этот адрес эл. почты не зарегистрирован в LinkedIn. Повторите попытку.",""},
         };
     }
 
-    @Test
-    public void validateShortUserEmailAndPassword() {
-
-        linkedinLoginPage.login("s", "P");
+    @Test(dataProvider = "validateShortUserEmailAndPass")
+    public void validateShortUserEmailAndPassword(String userEmail, String userPass,String correctMessage, String validationUserEmailField, String validationUserPassField)
+    {
+        linkedinLoginPage.login(userEmail,userPass);
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(driver);
         Assert.assertTrue(linkedinLoginSubmitPage.isLoaded(),"User is not on LoginSubmit page");
 
-        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
-                "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert box has incorrect message.");
-        Assert.assertEquals(linkedinLoginSubmitPage.getUserEmailValidationText(),
-                "Слишком короткий текст (минимальная длина – 3 симв., введено – 1 симв.).", "userEmail field has wrong validation massege text");
-        Assert.assertEquals(linkedinLoginSubmitPage.getUserPasswordValidationText(),
-                "Пароль должен содержать не менее 6 символов.", "userPassword field has wrong validation massege text");
+        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(), correctMessage, "Alert box has incorrect message.");
+        Assert.assertEquals(linkedinLoginSubmitPage.getUserEmailValidationText(), validationUserEmailField, "userEmail field has wrong validation massege text");
+        Assert.assertEquals(linkedinLoginSubmitPage.getUserPasswordValidationText(), validationUserPassField, "userPassword field has wrong validation massege text");
 
     }
 
