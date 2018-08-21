@@ -1,51 +1,68 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;// мы используем те методы  что переходят между страницами и возвращают перменные страничек
 
 import static java.lang.Thread.sleep;
 
-public class LinkedinLoginPage {
+public class LinkedinLoginPage extends BasePage {
 
-    private WebDriver driver;
-
+    @FindBy(xpath = "//*[@id='login-email']")
     private WebElement userEmailField;
-    private WebElement userPasswordField ;
-    private WebElement signInButton ;
 
-    public LinkedinLoginPage(WebDriver driver) {
+    @FindBy(xpath = "//*[@id='login-password']")
+    private WebElement userPasswordField;
+
+    @FindBy(xpath = "//*[@id='login-submit']")
+    private WebElement signInButton;
+
+    public LinkedinLoginPage(WebDriver driver) {// конструктор классаб конструктор вкотором инициализируем переменную
         this.driver = driver;
-        initElements();
-    }
-    private void initElements(){
-        userEmailField = driver.findElement(By.xpath("//*[@id='login-email']"));
-        userPasswordField = driver.findElement(By.xpath("//*[@id='login-password']"));
-        signInButton = driver.findElement(By.xpath("//*[@id='login-submit']"));
-    }
-    public void login(String userEmail, String userPass){
+        PageFactory.initElements(driver,this);//прошу воспользоваться встроеным методом и передать два параметра браузер и считывать из этого класа
+    }//
+
+    public LinkedinHomePage loginReturnHomePage(String userEmail, String userPass) {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPass);
         signInButton.click();
         try {
-            sleep(3000);
+            sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        return new LinkedinHomePage(driver);
     }
 
-    public String getCurrentPageTitle() {
-        return driver.getTitle();
+    public LinkedinLoginPage loginReturnLoginPage(String userEmail, String userPass) {
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPass);
+        signInButton.click();
+        try {
+            sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new LinkedinLoginPage(driver);
     }
 
-    public String getCurrentPageUrl() {
-        return driver.getCurrentUrl();
-
+    public LinkedinLoginSubmitPage loginReturnLoginSubmitPage(String userEmail, String userPass) {
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPass);
+        signInButton.click();
+        try {
+            sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new LinkedinLoginSubmitPage(driver);
     }
 
-    public boolean isLoaded(){
+    public boolean isLoaded() {
         return userEmailField.isDisplayed()
                 && getCurrentPageTitle().contains("LinkedIn: Войти или зарегистрироваться");
 
     }
+
 
 }
