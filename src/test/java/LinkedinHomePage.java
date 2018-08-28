@@ -10,11 +10,17 @@ import static java.lang.Thread.sleep;
 public class LinkedinHomePage extends BasePage {
 
 
-    @FindBy(xpath = "//*[@id='profile-nav-item']")
+    @FindBy(xpath = "//*[@id='profile-nav-item']") ////*[@id="nav-settings__dropdown-trigger"]
     private WebElement profileNavigationItem;
 
     @FindBy(xpath = "//input[@placeholder='Поиск' and @role]")
     private WebElement searchField;
+
+    @FindBy(xpath = "//*[@id='ember3773']")  // "//*[class='link-forgot-password']"
+     private WebElement navigationSettingsAccounts;
+    //<a id="ember3773" data-control-name="nav.settings_account_manage_account" target="_blank" href="https://www.linkedin.com/psettings/" class="block ember-view">                  Настройки и конфиденциальность
+
+
 
 
     public LinkedinHomePage (WebDriver driver) {
@@ -40,4 +46,5 @@ public class LinkedinHomePage extends BasePage {
         }
         return new LinkedinSearchPage(driver);
     }
+
     }

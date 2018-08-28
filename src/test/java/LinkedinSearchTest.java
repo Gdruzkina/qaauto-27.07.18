@@ -31,7 +31,7 @@ public class LinkedinSearchTest {
             Assert.assertEquals(linkedinSearchPage.getSearchResultsCount(), 10, "Search results count is wrong");
 
     }
-        }
 
-    }
+
+
 }

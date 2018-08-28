@@ -17,6 +17,10 @@ public class LinkedinLoginPage extends BasePage {
     @FindBy(xpath = "//*[@id='login-submit']")
     private WebElement signInButton;
 
+    @FindBy(xpath = "//a[@class='link-forgot-password']")
+    private WebElement forgotPasswordLink;
+
+
     public LinkedinLoginPage(WebDriver driver) {// конструктор классаб конструктор вкотором инициализируем переменную
         this.driver = driver;
         PageFactory.initElements(driver,this);//прошу воспользоваться встроеным методом и передать два параметра браузер и считывать из этого класа
@@ -62,6 +66,10 @@ public class LinkedinLoginPage extends BasePage {
         return userEmailField.isDisplayed()
                 && getCurrentPageTitle().contains("LinkedIn: Войти или зарегистрироваться");
 
+    }
+    public LinkedinForgotPasswordPage useForgotPasswordLink(){
+        forgotPasswordLink.click();
+        return new LinkedinForgotPasswordPage(driver);
     }
 
 
