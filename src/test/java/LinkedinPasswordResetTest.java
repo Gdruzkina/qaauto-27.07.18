@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 public class LinkedinPasswordResetTest {
     private WebDriver driver;
     private LinkedinLoginPage linkedinLoginPage;
-    public LinkedinForgotPasswordPage linkedinForgotPasswordPage;
-    public LinkedinResetPasswordPage linkedinResetPasswordPage;
+    private LinkedinForgotPasswordPage linkedinForgotPasswordPage;
+    private LinkedinResetPasswordPage linkedinResetPasswordPage;
     @BeforeMethod
     public void beforeMethod() {
         driver = new FirefoxDriver();
@@ -22,7 +22,8 @@ public class LinkedinPasswordResetTest {
     @Test
     public void passwordResetTest() {
         linkedinForgotPasswordPage = linkedinLoginPage.useForgotPasswordLink();
-        Assert.assertTrue(linkedinForgotPasswordPage.isLoaded(), "Forgot password page is not loaded.");
+        Assert.assertTrue(linkedinForgotPasswordPage.isLoaded(), "LinkedinLoginPage is not loaded");
+
         linkedinResetPasswordPage =  linkedinForgotPasswordPage.getResetPasswordLinkFromUserEmail();
         Assert.assertTrue(linkedinResetPasswordPage.isLoaded(), "Reset password page is not loaded.");
     }
