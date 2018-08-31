@@ -25,13 +25,13 @@ public class GMailService {
      * Example of util.GMailService usage
      * @param args - dummy args for main()
      */
-    public static void main(String[] args) {// пример использования тестовой утилиты
-        String messageSubject = "Lesson 10";// обьявляем переменные которые будет содержать письмо  письмо которое будет содержать тему
-        String messageTo = "postoltest@gmail.com";
-        String messageFrom = "mykola.gladchenko@gmail.com";
+    public static void main(String[] args) {
+        String messageSubject = "Lesson 10";
+        String messageTo = "galdruzk@gmail.com";
+        String messageFrom = "galdruzk@gmail.com";
 
         GMailService gMailService = new GMailService();
-        gMailService.connect();// меток конект- конектится к почтовику
+        gMailService.connect();
         String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
         System.out.println("Content: " + message);
     }
@@ -39,9 +39,9 @@ public class GMailService {
     /**
      * Default util.GMailService constructor with predefined user/pass credentials
      */
-    public GMailService(){// дефолтовый конструктор где указаны лонин и пароль
-        this.user = "postoltest@gmail.com";
-        this.pass = "q12345678T";
+    public GMailService(){
+        this.user = "galdruzk@gmail.com";
+        this.pass = "Parol123!";
     }
 
     /**

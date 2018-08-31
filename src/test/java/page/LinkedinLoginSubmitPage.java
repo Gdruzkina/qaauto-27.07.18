@@ -1,4 +1,5 @@
-import org.openqa.selenium.By;
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,22 +14,21 @@ public class LinkedinLoginSubmitPage extends BasePage {
     private WebElement userEmailValidationText;
 
     @FindBy(xpath = "//span[@id='session_password-login-error']")
-    private  WebElement userPasswordValidationText;
+    private WebElement userPasswordValidationText;
 
-    public LinkedinLoginSubmitPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver,this);
-
+    public LinkedinLoginSubmitPage(WebDriver browser) {
+        this.browser = browser;
+        PageFactory.initElements(browser, this);
     }
 
-    public String getAlertBoxText(){
+    public String getAlertBoxText() {
         return alertBox.getText();
     }
-    public boolean isLoaded(){
+
+    public boolean isLoaded() {
         return alertBox.isDisplayed()
                 && getCurrentPageTitle().contains("Войти в LinkedIn")
                 && getCurrentPageUrl().contains("/uas/login-submit");
-
     }
 
     public String getUserEmailValidationText() {

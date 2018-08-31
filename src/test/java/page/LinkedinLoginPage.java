@@ -1,13 +1,13 @@
-import org.openqa.selenium.By;
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;// мы используем те методы  что переходят между страницами и возвращают перменные страничек
+import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
 public class LinkedinLoginPage extends BasePage {
-
     @FindBy(xpath = "//*[@id='login-email']")
     private WebElement userEmailField;
 
@@ -20,34 +20,9 @@ public class LinkedinLoginPage extends BasePage {
     @FindBy(xpath = "//a[@class='link-forgot-password']")
     private WebElement forgotPasswordLink;
 
-
-    public LinkedinLoginPage(WebDriver driver) {// конструктор классаб конструктор вкотором инициализируем переменную
-        this.driver = driver;
-        PageFactory.initElements(driver,this);//прошу воспользоваться встроеным методом и передать два параметра браузер и считывать из этого класа
-    }//
-
-    public LinkedinHomePage loginReturnHomePage(String userEmail, String userPass) {
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPass);
-        signInButton.click();
-        try {
-            sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return new LinkedinHomePage(driver);
-    }
-
-    public LinkedinLoginPage loginReturnLoginPage(String userEmail, String userPass) {
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPass);
-        signInButton.click();
-        try {
-            sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return new LinkedinLoginPage(driver);
+    public LinkedinLoginPage(WebDriver browser) {
+        this.browser = browser;
+        PageFactory.initElements(browser,this);
     }
 
     public LinkedinLoginSubmitPage loginReturnLoginSubmitPage(String userEmail, String userPass) {
@@ -55,26 +30,49 @@ public class LinkedinLoginPage extends BasePage {
         userPasswordField.sendKeys(userPass);
         signInButton.click();
         try {
-            sleep(5000);
+            sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return new LinkedinLoginSubmitPage(driver);
+        return new LinkedinLoginSubmitPage(browser);
+    }
+
+    public LinkedinHomePage loginReturnHomePage(String userEmail, String userPass) {
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPass);
+        signInButton.click();
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new LinkedinHomePage(browser);
+    }
+
+    public LinkedinLoginPage loginReturnLoginPage(String userEmail, String userPass) {
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPass);
+        signInButton.click();
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new LinkedinLoginPage(browser);
     }
 
     public boolean isLoaded() {
         return userEmailField.isDisplayed()
                 && getCurrentPageTitle().contains("LinkedIn: Войти или зарегистрироваться");
-
     }
-    public LinkedinForgotPasswordPage useForgotPasswordLink(){
-        forgotPasswordLink.click();
-        return new LinkedinForgotPasswordPage(driver);
-    }
-
 
     public LinkedinRequestPasswordResetPage clickOnForgotPasswordLink() {
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         forgotPasswordLink.click();
-    return new LinkedinRequestPasswordResetPage(driver);
+        return new LinkedinRequestPasswordResetPage(browser);
     }
 }
