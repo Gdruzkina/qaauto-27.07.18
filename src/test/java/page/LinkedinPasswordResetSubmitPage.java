@@ -16,7 +16,10 @@ public class LinkedinPasswordResetSubmitPage extends BasePage {
         this.browser = browser;
         PageFactory.initElements(browser, this);
     }
-
+    /**
+     * Class to check if required element on page is displayed.
+     * @return true/false when reqiered element on page is/is not displayed.
+     */
     public boolean isLoaded() {
         try {
             sleep(100000);
@@ -27,6 +30,11 @@ public class LinkedinPasswordResetSubmitPage extends BasePage {
                 && getCurrentPageTitle().contains("Мы отправили вам ссылку по эл. почте")
                 && getCurrentPageUrl().contains("request-password-reset-submit");
     }
+
+    /**
+     *
+     * @return LinkedinSetNewPasswordPage
+     */
 
     public LinkedinSetNewPasswordPage navigateToLinkFromEmail() {
         String messageSubject = "here's the link to reset your password";

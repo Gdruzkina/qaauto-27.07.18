@@ -19,8 +19,13 @@ public class LinkedinHomePage extends BasePage {
     public LinkedinHomePage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
-    }
+        waitUntilElementIsVisible(searchField, 10);
 
+    }
+    /**
+     * Class to check if required element on page is displayed.
+     * @return true/false when reqiered element on page is/is not displayed.
+     */
     public boolean isLoaded() {
         return profileNavigationItem.isDisplayed()
                 && getCurrentPageTitle().contains("LinkedIn")
@@ -30,11 +35,7 @@ public class LinkedinHomePage extends BasePage {
     public LinkedinSearchPage search(String searchTerm) {
         searchField.sendKeys(searchTerm);
         searchField.sendKeys(Keys.ENTER);
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         return new LinkedinSearchPage(browser);
     }
 }

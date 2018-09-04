@@ -19,7 +19,10 @@ public class LinkedinRequestPasswordResetPage extends BasePage {
         this.browser = browser;
         PageFactory.initElements(browser, this);
     }
-
+    /**
+     * Class to check if required element on page is displayed.
+     * @return true/false when reqiered element on page is/is not displayed.
+     */
     public boolean isLoaded() {
         return findAccountButton.isDisplayed()
                 && getCurrentPageTitle().equals("Изменить пароль | LinkedIn")

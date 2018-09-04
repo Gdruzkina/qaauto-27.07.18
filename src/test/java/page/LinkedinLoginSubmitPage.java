@@ -19,12 +19,17 @@ public class LinkedinLoginSubmitPage extends BasePage {
     public LinkedinLoginSubmitPage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
+        waitUntilElementIsVisible(alertBox,10);
     }
 
     public String getAlertBoxText() {
         return alertBox.getText();
     }
 
+/**
+ * Class to check if required element on page is displayed.
+ * @return true/false when reqiered element on page is/is not displayed.
+ */
     public boolean isLoaded() {
         return alertBox.isDisplayed()
                 && getCurrentPageTitle().contains("Войти в LinkedIn")
