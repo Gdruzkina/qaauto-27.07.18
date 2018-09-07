@@ -10,6 +10,8 @@ import page.LinkedinHomePage;
 import page.LinkedinLoginPage;
 import page.LinkedinSearchPage;
 
+import java.util.List;
+
 public class LinkedinSearchTest {
 
     WebDriver browser;
@@ -35,7 +37,8 @@ public class LinkedinSearchTest {
 
     @Test
     public void basicSearchTest() {
-        LinkedinHomePage linkedinHomePage = linkedinLoginPage.loginReturnHomePage(
+        String searchTerm = "HR";
+        LinkedinHomePage linkedinHomePage = linkedinLoginPage.login(
                 "galdruzk@gmail.com",
                 "Parol123!");
         Assert.assertTrue(linkedinHomePage.isLoaded(),
@@ -48,12 +51,11 @@ public class LinkedinSearchTest {
 
         Assert.assertEquals(linkedinSearchPage.getSearchResultsCount(), 10,
                 "Search results count is wrong.");
-
-
-
-
-
-
+        List<String> searchResults = linkedinSearchPage.getSearchResultsList();
+        for (String searchResult: searchResults){
+            Assert.assertTrue( searchResult.toLowerCase().contains(searchTerm.toLowerCase()),
+                    "searchTerm "+searchTerm+" not found in:\n"+searchResult);
+        }
 
     }
 }

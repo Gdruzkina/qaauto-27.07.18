@@ -35,44 +35,26 @@ public class LinkedinLoginPage extends BasePage {
     }
 
     /**
-     * Metod for
-     * @param userEmail - input WebElement useremail
-     * @param userPass - input WebElement userPass
-     * @return LinkedinLoginSubmitPage
+     * Method that enters userEmail/userPass and click on singIn button.
+     * @param userEmail -  String with user Email.
+     * @param userPass -  String with user Pass.
+     * @param <T>  - Generic type to return corresponding pageObject
+     * @return eithher LinkedinHomePage or LinkedinLoginSubmitPage or LinkedinLoginPage pageObject.
      */
-    public LinkedinLoginSubmitPage login(String userEmail, String userPass) {
+    public <T> T login(String userEmail, String userPass) {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPass);
         signInButton.click();
-        if
-        return new LinkedinLoginSubmitPage(browser);
+        if (getCurrentPageUrl().contains("/feed")) {
+            return (T) new LinkedinHomePage(browser);
+        }
+        if (getCurrentPageUrl().contains("/uas/login-submit")) {
+            return (T) new LinkedinLoginSubmitPage(browser);
+        } else {
+            return (T) new LinkedinLoginPage(browser);
+        }
     }
 
-    /**
-     * Metod for login try from LognPage
-     * @param userEmail
-     * @param userPass
-     * @return LinkedinHomePage
-     */
-    public LinkedinHomePage loginReturnHomePage(String userEmail, String userPass) {
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPass);
-        signInButton.click();
-        return new LinkedinHomePage(browser);
-    }
-
-    /**
-     * Method for login try from LoginPage
-     * @param userEmail
-     * @param userPass
-     * @return LinkedinLoginPage
-     */
-    public LinkedinLoginPage loginReturnLoginPage(String userEmail, String userPass) {
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPass);
-        signInButton.click();
-        return new LinkedinLoginPage(browser);
-    }
     /**
      * Class to check if required element on page is displayed.
      * @return true/false when reqiered element on page is/is not displayed.

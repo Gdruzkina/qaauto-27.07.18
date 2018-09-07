@@ -6,6 +6,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.GMailService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BasePage {
     protected WebDriver browser;
     protected static GMailService gMailService = new GMailService();
@@ -25,5 +28,4 @@ public abstract class BasePage {
     }
 
     public abstract boolean isLoaded();
-
 }

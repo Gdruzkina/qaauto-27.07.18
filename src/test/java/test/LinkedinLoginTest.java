@@ -40,7 +40,7 @@ public class LinkedinLoginTest {
     @Test(dataProvider = "validFieldsCombination")
     public void successfulLoginTest(String userEmail, String userPass) {
         LinkedinHomePage linkedinHomePage =
-                linkedinLoginPage.loginReturnHomePage(userEmail, userPass);
+                linkedinLoginPage.login(userEmail, userPass);
         Assert.assertTrue(linkedinHomePage.isLoaded(),
                 "Home page is not loaded.");
     }
@@ -57,7 +57,7 @@ public class LinkedinLoginTest {
 
     @Test(dataProvider = "emptyFieldsCombination")
     public void validateEmptyUserEmailAndUserPassword (String userEmail, String userPass) {
-        linkedinLoginPage.loginReturnLoginPage(userEmail, userPass);
+        linkedinLoginPage.login(userEmail, userPass);
         Assert.assertTrue(linkedinLoginPage.isLoaded(),
                 "User is not on Login page.");
     }
@@ -80,8 +80,8 @@ public class LinkedinLoginTest {
                                              String userPass,
                                              String userEmailValidationText,
                                              String userPassValidationText) {
-        LinkedinLoginSubmitPage linkedinLoginSubmitPage =
-                linkedinLoginPage.loginReturnLoginSubmitPage(userEmail, userPass);
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage;
+        linkedinLoginSubmitPage = linkedinLoginPage.login(userEmail, userPass);
         Assert.assertTrue(linkedinLoginSubmitPage.isLoaded(),
                 "User is not on LoginSubmit page.");
 
